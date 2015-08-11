@@ -5,14 +5,14 @@ using System.IO;
 using System.Data.SqlClient;
 using System.Collections.Specialized;
 using System.Web;
-using System.IO;
+using System.Reflection;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Lcps.Division.Directory.Providers
 {
-    public class ImportTextFile : DataTable
+    public class ImportTextFile<TEntity> : DataTable
     {
         #region Fields
 
@@ -30,6 +30,7 @@ namespace Lcps.Division.Directory.Providers
             Delimiter = delimiter;
             Title = title;
             this.BrowseFormRoute = browseFormRoute;
+            this.Items = new List<TEntity>();
         }
 
         #endregion
@@ -49,6 +50,8 @@ namespace Lcps.Division.Directory.Providers
 
         public MvcRouteDefinition BrowseFormRoute { get; set; }
 
+        public List<TEntity> Items { get; set; }
+
         #endregion
 
 
@@ -64,8 +67,12 @@ namespace Lcps.Division.Directory.Providers
         private void Load(StreamReader reader)
         {
             Columns.Clear();
+
             Rows.Clear();
+
             int index = 0;
+
+            Items = new List<TEntity>();
 
             Columns.Add("Index", typeof(int));
 
@@ -92,6 +99,8 @@ namespace Lcps.Division.Directory.Providers
                     record.AddRange(rec);
 
                     Rows.Add(record.ToArray());
+
+                    Items.Add(EntityConverter<TEntity>.FromDataRow(Rows[index -1]));
                 }
 
                 index++;

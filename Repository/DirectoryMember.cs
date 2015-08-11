@@ -62,7 +62,7 @@ namespace Lcps.Division.Directory.Repository
         [Display(Name = "Title")]
         [MaxLength(256)]
         public string Title { get; set; }
-        
+
         [MaxLength(256)]
         [Display(Name = "Password")]
         [DataType(DataType.Password)]
@@ -90,24 +90,29 @@ namespace Lcps.Division.Directory.Repository
             }
         }
 
-        
+
 
 
         public List<MembershipScope> GetApplicableScopes()
         {
-                return MembershipScopeRepository.GetApplicableScopes(this.MembershipScope).OrderBy(x => x.Caption).ToList();
+            return MembershipScopeRepository.GetApplicableScopes(this.MembershipScope).OrderBy(x => x.Caption).ToList();
+        }
+
+        public string GetMembershipScopeCaption()
+        {
+            return string.Join(", ", GetApplicableScopes().Select(x => x.Caption).ToArray());
         }
 
         public int GetCategoryCount()
         {
-                int test = 0;
-                
-                if (GetLocations().Count() > 0) test++;
-                if (GetTypes().Count() > 0) test++;
-                if (GetPositions().Count() > 0) test++;
-                if (GetGrades().Count() > 0) test++;
+            int test = 0;
 
-                return 12 / test;
+            if (GetLocations().Count() > 0) test++;
+            if (GetTypes().Count() > 0) test++;
+            if (GetPositions().Count() > 0) test++;
+            if (GetGrades().Count() > 0) test++;
+
+            return 12 / test;
 
         }
 
@@ -124,12 +129,12 @@ namespace Lcps.Division.Directory.Repository
 
         public List<MembershipScope> GetPositions()
         {
-            return GetByQualifier(MembershipScopeQualifier.Position); 
+            return GetByQualifier(MembershipScopeQualifier.Position);
         }
 
         public List<MembershipScope> GetGrades()
         {
-            return GetByQualifier(MembershipScopeQualifier.Grade); 
+            return GetByQualifier(MembershipScopeQualifier.Grade);
         }
 
         private List<MembershipScope> GetByQualifier(MembershipScopeQualifier q)

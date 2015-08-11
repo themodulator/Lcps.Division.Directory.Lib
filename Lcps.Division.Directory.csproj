@@ -97,6 +97,7 @@
     <Compile Include="Infrastructure\ApplicationOAuthProvider.cs" />
     <Compile Include="Infrastructure\DirectoryContext.cs" />
     <Compile Include="Infrastructure\LcpsRepositoryContext.cs" />
+    <Compile Include="Providers\EntityConverter.cs" />
     <Compile Include="Providers\ImportTextFile.cs">
       <SubType>Component</SubType>
     </Compile>
