@@ -77,6 +77,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -97,30 +99,39 @@
     <Compile Include="Infrastructure\ApplicationOAuthProvider.cs" />
     <Compile Include="Infrastructure\DirectoryContext.cs" />
     <Compile Include="Infrastructure\LcpsRepositoryContext.cs" />
+    <Compile Include="Providers\BootstrapStatus.cs" />
     <Compile Include="Providers\EntityConverter.cs" />
+    <Compile Include="Providers\IImportable.cs" />
+    <Compile Include="Providers\Importable.cs" />
+    <Compile Include="Providers\ImportCompareFieldAttribute.cs" />
+    <Compile Include="Providers\ImportSyncStatus.cs" />
     <Compile Include="Providers\ImportTextFile.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Providers\ImportXml.cs" />
+    <Compile Include="Providers\LdapFieldMapAttribute.cs" />
+    <Compile Include="Providers\Ldap\LcpsAdsUserAccountControl.cs" />
+    <Compile Include="Providers\Ldap\LdapUser.cs" />
+    <Compile Include="Repository\MembershipFilter.cs" />
+    <Compile Include="Repository\MembershipFilterRepository.cs" />
+    <Compile Include="Repository\MembershipFilterSchema.cs" />
     <Compile Include="Providers\MvcRouteDefinition.cs" />
+    <Compile Include="Repository\DirectoryMember.cs" />
+    <Compile Include="Repository\DirectoryMemberClass.cs" />
     <Compile Include="Repository\DiurectoryMemberGender.cs" />
     <Compile Include="Repository\IDirectoryMember.cs" />
-    <Compile Include="Repository\Ldap\LdapGroupMap.cs" />
-    <Compile Include="Repository\Ldap\LdapMapProviders.cs" />
     <Compile Include="Repository\MembershipScopeEditorItem.cs" />
     <Compile Include="Repository\MembershipScopeRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\MembershipScope.cs" />
     <Compile Include="Repository\MembershipScopeQualifier.cs" />
-    <Compile Include="Repository\DirectoryMember.cs" />
+    <Compile Include="Repository\DirectoryMemberInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Providers\HumanResources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\Anvil\Anvil.Repository\Anvil.Repository.csproj">
       <Project>{b578b9a8-01f7-48e8-bade-a1847f0e23b8}</Project>

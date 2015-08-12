@@ -31,7 +31,7 @@ namespace Lcps.Division.Directory.Infrastructure
         {
             var userManager = context.OwinContext.GetUserManager<LcpsAccountManager>();
 
-            DirectoryMember user = await userManager.FindAsync(context.UserName, context.Password);
+            DirectoryMemberInfo user = await userManager.FindAsync(context.UserName, context.Password);
 
             if (user == null)
             {

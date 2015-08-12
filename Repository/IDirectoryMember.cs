@@ -12,6 +12,8 @@ namespace Lcps.Division.Directory.Repository
 {
     public interface IDirectoryMember
     {
+        string Id { get; set; }
+
         string InternalId { get; set; }
 
         string GivenName { get; set; }
@@ -28,6 +30,13 @@ namespace Lcps.Division.Directory.Repository
 
         string Title { get; set; }
 
+        string UserName { get; set; }
+
+        string Email { get; set; }
+
         string InitialPassword { get; set; }
+
+        DirectoryMemberClass MemberClass { get; set; }
+
     }
 }

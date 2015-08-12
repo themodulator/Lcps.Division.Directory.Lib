@@ -22,7 +22,9 @@ namespace Lcps.Division.Directory.Infrastructure
 
         private MembershipScopeRepository _membershipScopes;
 
-        private GenericRepository<DirectoryMember> _directoryMembers;
+        private GenericRepository<DirectoryMemberInfo> _directoryMembers;
+
+        private MembershipFilterRepository _membershipFilters;
 
         #endregion
 
@@ -39,18 +41,32 @@ namespace Lcps.Division.Directory.Infrastructure
             }
         }
 
-        public GenericRepository<DirectoryMember> DirectoryMembers
+
+
+        public GenericRepository<DirectoryMemberInfo> DirectoryMembers
         {
             get
             {
                 if (_directoryMembers == null)
-                    _directoryMembers = new GenericRepository<DirectoryMember>(_dbConext);
+                    _directoryMembers = new GenericRepository<DirectoryMemberInfo>(_dbConext);
 
                 return _directoryMembers;
             }
 
         }
 
+        public MembershipFilterRepository MembershipFilters
+        {
+            get
+            {
+                if (_membershipFilters == null)
+                    _membershipFilters = new MembershipFilterRepository();
+
+                return _membershipFilters;
+            }
+        }
+
         #endregion
+
     }
 }

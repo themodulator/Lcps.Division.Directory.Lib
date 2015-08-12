@@ -17,7 +17,7 @@ using Lcps.Division.Directory.Repository;
 
 namespace Lcps.Division.Directory.Infrastructure
 {
-    public class LcpsRepositoryContext : IdentityDbContext<DirectoryMember>
+    public class LcpsRepositoryContext : IdentityDbContext<DirectoryMemberInfo>
     {
         public LcpsRepositoryContext()
             : base(Anvil.Repository.Properties.Settings.Default._repositoryConnectionString)
@@ -38,6 +38,6 @@ namespace Lcps.Division.Directory.Infrastructure
 
         public DbSet<MembershipScope> MembershipScopes { get; set; }
 
-        
+        public DbSet<MembershipFilter> MembershipFilters { get; set; }
     }
 }

@@ -20,6 +20,8 @@ namespace Lcps.Division.Directory.Repository
             :base(new LcpsRepositoryContext())
         { }
 
+        
+
         public override void Insert(MembershipScope entity)
         {
 
@@ -42,18 +44,26 @@ namespace Lcps.Division.Directory.Repository
             return Regex.Replace(caption, @"[^A-Za-z0-9]+", "");
         }
 
-        public Type GetEnumType()
+        public static Type GetEnumType()
         {
-            Type t = Get().ToEnum(x => x.LiteralName, x => x.BinaryValue);
+            MembershipScopeRepository r = new MembershipScopeRepository();
+            Type t = r.Get().ToEnum(x => x.LiteralName, x => x.BinaryValue);
             return t;
         }
 
-        public bool HasFlag(long binaryValue, string literalName)
+        public static bool HasFlag(long binaryValue, string literalName, System.Type t)
         {
-            Type t = GetEnumType();
             Enum bv = (Enum)Enum.ToObject(t, binaryValue);
             Enum cv = (Enum)Enum.Parse(t, literalName);
             return cv.HasFlag(bv);
+        }
+
+        public static bool HasFlag(long memberValue, long challenge, System.Type t)
+        {
+            Enum mv = (Enum)Enum.ToObject(t, memberValue);
+            Enum cv = (Enum)Enum.ToObject(t, challenge);
+
+            return mv.HasFlag(cv);
         }
 
         public string GetLiteralCaption(long binaryValue)
@@ -84,6 +94,21 @@ namespace Lcps.Division.Directory.Repository
             }
 
             return items;
+        }
+
+        public static string[] GetApplicableCaptions(long binaryValue)
+        {
+            List<MembershipScope> scopes = GetApplicableScopes(binaryValue);
+            return scopes.Select(x => x.Caption).ToArray();
+        }
+
+        public static List<MembershipScope> GetByQualifier(MembershipScopeQualifier q)
+        {
+            List<MembershipScope> scopes = (new MembershipScopeRepository()).Get()
+                .Where(x => x.ScopeQualifier == q)
+                .OrderBy(x => x.Caption).ToList();
+
+            return scopes;
         }
 
     }

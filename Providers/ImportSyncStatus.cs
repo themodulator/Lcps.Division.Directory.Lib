@@ -8,13 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lcps.Division.Directory.Repository.Ldap
+namespace Lcps.Division.Directory.Providers
 {
-    public enum LdapMapProviders
+    public enum ImportSyncStatus
     {
         None = 0,
-        OU = 1,
-        Group = 2,
-        Home = 3
+        Current = 1,
+        Insert = 2,
+        Update = 3,
+        Error = 4
     }
 }
